@@ -1,0 +1,33 @@
+'use client'
+
+import Link from 'next/link'
+import { GithubIcon, LinkedinIcon } from '@/components/site/brand-icons'
+import { Check, ChevronLeft, ExternalLink, Flame,   Plus, Send, Sparkles } from 'lucide-react'
+import { useState } from 'react'
+
+const requirements = ['Create responsive layout', 'Add hero heading', 'Add CTA', 'Support mobile viewport', 'Deploy or run locally']
+
+export default function ChallengeDayPage() {
+  const [done, setDone] = useState(false)
+  const [github, setGithub] = useState('')
+  const [linkedin, setLinkedin] = useState('')
+  return <main className="min-h-screen overflow-x-hidden pb-10">
+    <header className="border-b border-white/10 bg-background/80 px-4 py-3 backdrop-blur-xl"><div className="mx-auto flex max-w-3xl items-center justify-between"><Link href="/dashboard" className="grid size-10 place-items-center rounded-xl glass" aria-label="Back to dashboard"><ChevronLeft className="size-5" /></Link><div className="text-center"><div className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Day 12 / 60</div><div className="text-sm font-semibold">Build. Ship. Prove.</div></div><div className="flex items-center gap-1.5 rounded-xl bg-orange-500/10 px-2.5 py-2"><Flame className="size-4 text-orange-400" /><span className="text-xs font-bold">11</span></div></div></header>
+    <div className="mx-auto max-w-3xl px-4 py-6">
+      <section><span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1.5 text-[10px] font-semibold text-primary"><Sparkles className="size-3" /> +150 XP</span><h1 className="mt-4 text-3xl font-bold tracking-tight">Build a Responsive Portfolio Hero</h1><p className="mt-3 text-sm leading-7 text-muted-foreground">Create a polished hero section that works beautifully on mobile and desktop. Make the first screen communicate who you are, what you build, and what the visitor should do next.</p></section>
+      <section className="mt-6 glass rounded-3xl p-5"><h2 className="text-base font-bold">What you need to build</h2><div className="mt-4 space-y-2">{requirements.map(r=><div key={r} className="flex items-center gap-3 rounded-xl bg-white/[0.03] px-3 py-3 text-sm"><span className="grid size-6 place-items-center rounded-md border border-white/10"><Check className="size-3 text-muted-foreground" /></span>{r}</div>)}</div></section>
+      <section className="mt-4 grid grid-cols-2 gap-3"><div className="glass rounded-2xl p-4"><div className="text-[10px] uppercase tracking-wider text-muted-foreground">Time</div><div className="mt-1 text-xl font-bold">45 min</div></div><div className="glass rounded-2xl p-4"><div className="text-[10px] uppercase tracking-wider text-muted-foreground">Difficulty</div><div className="mt-1 text-xl font-bold">Intermediate</div></div></section>
+      <section className="mt-4 glass rounded-3xl p-5"><h2 className="text-base font-bold">Why this matters</h2><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Today's task strengthens responsive UI skills you'll use in real projects. The goal is not perfection—it is shipping a focused piece of work and proving you showed up.</p></section>
+
+      <section className="mt-6"><div className="flex items-end justify-between"><div><div className="text-[10px] uppercase tracking-[0.2em] text-cyan">Proof of work</div><h2 className="mt-1 text-xl font-bold">Show your work</h2></div><span className="text-[10px] text-muted-foreground">Mock verification</span></div>
+        <div className="mt-4 space-y-3">
+          <div className="glass rounded-3xl p-5"><div className="flex items-center gap-3"><span className="grid size-10 place-items-center rounded-xl bg-white/5"><GithubIcon className="size-5" /></span><div><h3 className="text-sm font-semibold">GitHub Proof</h3><p className="text-[10px] text-muted-foreground">Add repository + commit URLs</p></div></div><label className="mt-4 block text-[10px] font-semibold text-muted-foreground">Repository URL</label><input value={github} onChange={e=>setGithub(e.target.value)} placeholder="https://github.com/you/project" className="mt-1.5 min-h-11 w-full rounded-xl border border-white/10 bg-black/10 px-3 text-sm outline-none focus:border-primary" /><label className="mt-3 block text-[10px] font-semibold text-muted-foreground">Commit URL</label><input placeholder="https://github.com/.../commit/..." className="mt-1.5 min-h-11 w-full rounded-xl border border-white/10 bg-black/10 px-3 text-sm outline-none focus:border-primary" /><button onClick={()=>setDone(true)} className="mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary to-accent px-4 text-sm font-semibold text-primary-foreground"><Check className="size-4" /> Verify GitHub Proof</button></div>
+          <div className="glass rounded-3xl p-5"><div className="flex items-center gap-3"><span className="grid size-10 place-items-center rounded-xl bg-cyan/10"><LinkedinIcon className="size-5 text-cyan" /></span><div><h3 className="text-sm font-semibold">LinkedIn Proof</h3><p className="text-[10px] text-muted-foreground">Add your challenge post URL</p></div></div><input value={linkedin} onChange={e=>setLinkedin(e.target.value)} placeholder="https://linkedin.com/posts/..." className="mt-4 min-h-11 w-full rounded-xl border border-white/10 bg-black/10 px-3 text-sm outline-none focus:border-cyan" /><button onClick={()=>setDone(true)} className="mt-3 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-cyan/20 bg-cyan/10 px-4 text-sm font-semibold text-cyan"><Plus className="size-4" /> Add LinkedIn Proof</button></div>
+        </div>
+      </section>
+
+      {done && <section className="mt-4 gradient-border rounded-3xl p-1"><div className="glass-strong rounded-[1.35rem] p-5"><div className="flex items-center gap-2 text-cyan"><Check className="size-5" /><span className="text-sm font-bold">Day 12 complete</span></div><div className="mt-3 grid gap-2 text-xs text-muted-foreground"><div>✓ GitHub proof added</div><div>✓ LinkedIn proof added</div><div className="font-semibold text-accent">+150 XP earned</div></div><Link href="/dashboard" className="mt-5 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary to-accent text-sm font-semibold text-primary-foreground">Continue to Day 13 <Send className="size-4" /></Link></div></section>}
+      <p className="mt-6 text-center text-[10px] leading-relaxed text-muted-foreground"><ExternalLink className="mr-1 inline size-3" /> No real GitHub or LinkedIn API is connected in this prototype.</p>
+    </div>
+  </main>
+}
